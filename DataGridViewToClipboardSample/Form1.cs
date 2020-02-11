@@ -32,6 +32,9 @@ namespace DataGridViewToClipboardSample
 
         private void ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // 選択行を退避
+            int index = dataGridView1.SelectedRows[0].Index;
+
             // 一時的に制御を解除
 
             // 操作列以外をクリップボードにコピーするため、セル選択モード
@@ -42,7 +45,7 @@ namespace DataGridViewToClipboardSample
             // ※通常は単一行のみ選択可
             dataGridView1.MultiSelect = true;
 
-            int index = 0;
+            // 一時的に全行選択状態にする
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
                 foreach (DataGridViewCell column in row.Cells)
@@ -55,12 +58,6 @@ namespace DataGridViewToClipboardSample
 
                     // 列選択
                     column.Selected = true;
-                }
-
-                if (row.Selected)
-                {
-                    // 選択済みの行を退避
-                    index = row.Index;
                 }
 
                 row.Selected = true;
